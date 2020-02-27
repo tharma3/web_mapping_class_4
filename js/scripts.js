@@ -109,8 +109,8 @@ var map = new mapboxgl.Map(initOptions);
 
         var hoveredFeature = features[0]
         var featureInfo = `
-          <h4>Tree ID: ${hoveredFeature.properties.tree_id}</h4>
-          <p><strong>Species:</strong> $${hoveredFeature.properties.spc_common}</p>
+          <p><strong>Tree ID: </strong>${hoveredFeature.properties.tree_id}</p>
+          <p><strong>Species:</strong> ${hoveredFeature.properties.spc_common}</p>
           <p><strong>Health:</strong> ${hoveredFeature.properties.health}</p>
         `
         $('#feature-info').html(featureInfo)
