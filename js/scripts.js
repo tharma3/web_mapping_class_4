@@ -15,25 +15,25 @@ var initOptions = {
   zoom: initialZoom, // initial view zoom level (0-18)
 }
 
-var FindTreeHealth - (code) => {
-  switch (code) {
-    case 'Fair':
-      return {
-        color: '72a2c0'
-        description: 'Fair'
-      };
-    case 'Poor':
-      return {
-        color: 'f2a104'
-        description: 'Poor'
-      };
-    case 'Good':
-      return {
-        color: '192e5b'
-        description: 'Good'
-      };
-  }
-};
+// var FindTreeHealth - (code) => {
+//   switch (code) {
+//     case 'Fair':
+//       return {
+//         color: '72a2c0'
+//         description: 'Fair'
+//       };
+//     case 'Poor':
+//       return {
+//         color: 'f2a104'
+//         description: 'Poor'
+//       };
+//     case 'Good':
+//       return {
+//         color: '192e5b'
+//         description: 'Good'
+//       };
+//   }
+// };
 
 // create the new map
 var map = new mapboxgl.Map(initOptions);
@@ -47,7 +47,7 @@ map.addControl(new mapboxgl.NavigationControl());
     // add a geojson source to the map using our external geojson file
     map.addSource('bk_nta_trees', {
       type: 'geojson',
-      data: './data/bk_nta_tress.geojson',
+      data: './data/bk_nta_trees.geojson',
     });
 
     // let's make sure the source got added by logging the current map state to the console
@@ -63,19 +63,16 @@ map.addControl(new mapboxgl.NavigationControl());
           type: 'categorical',
           property: 'health',
           stops: [
-            [
-              'Fair',
-              FindTreeHealth('Fair').color,
-            ],
-            [
-              'Good',
-              FindTreeHealth('Good').color,
-            ],
-            [
-              'Poor',
-              FindTreeHealth('Poor').color,
-            ],
-          ]
+            'match',
+            ['get', 'health'],
+            'Fair',
+            '#72a2c0',
+            'Poor',
+            '#f2a104',
+            'Good',
+            '#192e5b',
+            /* other */ '#ccc'
+            ]
         }
       }
     })
@@ -105,7 +102,7 @@ map.addControl(new mapboxgl.NavigationControl());
     map.on('mousemove', function (e) {
       // query for the features under the mouse, but only in the lots layer
       var features = map.queryRenderedFeatures(e.point, {
-          layers: ['point-bk_nta_trees'],
+          layers: ['point-bk-nta-trees'],
       });
 
       // if the mouse pointer is over a feature on our layer of interest
@@ -115,9 +112,9 @@ map.addControl(new mapboxgl.NavigationControl());
 
         var hoveredFeature = features[0]
         var featureInfo = `
-          <h4>${hoveredFeature.properties.Address}</h4>
-          <p><strong>Land Use:</strong> ${LandUseLookup(parseInt(hoveredFeature.properties.LandUse)).description}</p>
-          <p><strong>Zoning:</strong> ${hoveredFeature.properties.ZoneDist1}</p>
+          <h4>Tree ID: ${hoveredFeature.properties.tree_id}</h4>
+          <p><strong>Species:</strong> $${hoveredFeature.properties.spc_common}</p>
+          <p><strong>Health:</strong> ${hoveredFeature.properties.health}</p>
         `
         $('#feature-info').html(featureInfo)
 
