@@ -35,6 +35,24 @@ var initOptions = {
 //   }
 // };
 
+var layers = ['Good', 'Fair', 'Poor'];
+var colors = ['#192e5b', '#72a2c0', '#f2a104'];
+
+for (i = 0; i < layers.length; i++) {
+  var layer = layers[i];
+  var color = colors[i];
+  var item = document.createElement('div');
+  var key = document.createElement('span');
+  key.className = 'legend-key';
+  key.style.backgroundColor = color;
+
+  var value = document.createElement('span');
+  value.innerHTML = layer;
+  item.appendChild(key);
+  item.appendChild(value);
+  legend.appendChild(item);
+}
+
 var defaultText = '<p>Hover over a tree to learn more about it.</p>'
 $('#feature-info').html(defaultText)
 
