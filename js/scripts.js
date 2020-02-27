@@ -55,7 +55,7 @@ var map = new mapboxgl.Map(initOptions);
 
     // add a layer for our custom source
     map.addLayer({
-      id: 'point-bk-nta-trees',
+      id: 'bk-nta-trees',
       type: 'circle',
       source: 'bk_nta_trees',
       paint: {
