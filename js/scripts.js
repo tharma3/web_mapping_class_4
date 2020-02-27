@@ -59,10 +59,7 @@ var map = new mapboxgl.Map(initOptions);
       type: 'circle',
       source: 'bk_nta_trees',
       paint: {
-        'circle-color': {
-          type: 'categorical',
-          property: 'health',
-          stops: [
+        'circle-color': [
             'match',
             ['get', 'health'],
             'Fair',
