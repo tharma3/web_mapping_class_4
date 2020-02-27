@@ -71,8 +71,8 @@ var map = new mapboxgl.Map(initOptions);
             /* other */ '#ccc'
             ]
         }
-      }
-    })
+      })
+
 
     // add an empty data source, which we will use to highlight the lot the user is hovering over
     map.addSource('highlight-feature', {
