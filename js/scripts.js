@@ -99,7 +99,7 @@ var map = new mapboxgl.Map(initOptions);
     map.on('mousemove', function (e) {
       // query for the features under the mouse, but only in the lots layer
       var features = map.queryRenderedFeatures(e.point, {
-          layers: ['point-bk-nta-trees'],
+          layers: ['bk-nta-trees'],
       });
 
       // if the mouse pointer is over a feature on our layer of interest
