@@ -35,6 +35,9 @@ var initOptions = {
 //   }
 // };
 
+var defaultText = '<p>Hover over a tree to learn more about it.</p>'
+$('#feature-info').html(defaultText)
+
 // create the new map
 var map = new mapboxgl.Map(initOptions);
 
